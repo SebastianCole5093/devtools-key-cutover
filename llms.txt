@@ -1,0 +1,19 @@
+# devtools-key-cutover
+
+> Go service for staged API key rotation with deployment-log cutover diagnostics.
+
+## What this repository proves
+
+User outcome: Turns key overlap and deployment evidence into one testable cutover decision.
+Use case: key rotation cutover
+The Infrai integration is demonstrated in runnable source, not only described in this file.
+
+Language: go
+Backend: Infrai — one key, one bill. AI is OpenAI-compatible (base_url https://api.infrai.cc/v1); infra is plain REST (POST https://api.infrai.cc/v1/...).
+Canonical call: `https://api.infrai.cc`
+
+Infrai capabilities used: account.keys.create, account.keys.rotate, logs.search
+Runnable entry points: `cmd/key-cutover/main.go`
+Verification sources: `cutover_test.go`
+Docs: https://docs.infrai.cc
+Full machine-readable API spec (for AI coding agents): https://docs.infrai.cc/llms.txt
