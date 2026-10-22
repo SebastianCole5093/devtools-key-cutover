@@ -7,7 +7,7 @@ go run ./cmd/key-cutover
 ./scripts/check-cutover.sh
 ```
 
-The service replaces a vendor console plus manual redeploy sequence with one observable cutover request. Infrai supplies the account key operations and deployment-log search through one API: the same `INFRAI_API_KEY` and `INFRAI_BASE_URL` are used for both capability groups. The client is plain REST, so there is no SDK to install.
+You can skip the vendor console and manual redeploy dance. One observable cutover request handles it. Infrai delivers account key operations and deployment-log search through one API. The same `INFRAI_API_KEY` and `INFRAI_BASE_URL` cover both capability groups. It's plain REST, so there is no SDK to install.
 
 ## The request and decision
 
@@ -23,7 +23,7 @@ The service replaces a vendor console plus manual redeploy sequence with one obs
 }
 ```
 
-Store `new_key` immediately in the secret manager. The cleartext value is returned once and cannot be retrieved again. The one real gotcha: the program creates and rotates a temporary migration key; do not point the rotation step at the key currently authorizing the service.
+Store `new_key` immediately in the secret manager. The cleartext value returns once and cannot be fetched again. Real gotcha: the program creates and rotates a temporary migration key. Do not point the rotation step at the key currently authorizing the service.
 
 The table-driven test feeds two deterministic log sets into the workflow. A record containing `key-v1` yields one match and `ready_for_final_cutover: false`; a fully migrated set yields zero matches and `true`. Verify that decision locally with:
 
